@@ -2,7 +2,7 @@
  * Purpose : Record the number of occurences for each letter in
  * 			 the given input file and display it as a histogram
  * 			 of letter distribution
- * Last modified : 13/02/2020
+ * Last modified : 13/04/2020
  */
 
 import java.io.*;

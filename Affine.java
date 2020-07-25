@@ -1,7 +1,7 @@
 /* Author : Mahmudul Hossain (19303235)
  * Purpose : This class contains all the static functions for Affine cipher
  * 			 to encrypt and decrypt.
- * Last modified : 13/04/2020
+ * Last modified : 17/04/2020
  */
 
 public class Affine
@@ -159,7 +159,7 @@ public class Affine
 
 				//The decryption formula does not work if the calculated value (charIdx - b)
 				//is less than 0 hence with the help of absIdx, if absIdx is 
-				//less than 0 then we add 27 accordingly
+				//less than 0 then we add 27 accordingly to retain a positive value
 				absIdx = ((int)charIdx - b);
 				if(absIdx < 0)
 				{
@@ -183,7 +183,7 @@ public class Affine
 
 				//The decryption formula does not work if the calculated value (charIdx - b)
 				//is less than 0 hence with the help of absIdx, if absIdx is 
-				//less than 0 then we add 27 accordingly			
+				//less than 0 then we add 27 accordingly to retain a positive value			
 				absIdx = ((int)charIdx - b);
 				if(absIdx < 0)
 				{
@@ -208,7 +208,7 @@ public class Affine
 				absIdx = 26 - b;
 				//The decryption formula does not work if the calculated value (charIdx - b)
 				//is less than 0 hence with the help of absIdx, if absIdx is 
-				//less than 0 then we add 27 accordingly			
+				//less than 0 then we add 27 accordingly to retain a positive value			
 				if(absIdx < 0)
 				{
 					absIdx = absIdx + 27;
@@ -232,7 +232,7 @@ public class Affine
 				absIdx = 26 - b;
 				//The decryption formula does not work if the calculated value (charIdx - b)
 				//is less than 0 hence with the help of absIdx, if absIdx is 
-				//less than 0 then we add 27 accordingly			
+				//less than 0 then we add 27 accordingly to retain a positive value
 				if(absIdx < 0)
 				{
 					absIdx = absIdx + 27;

@@ -1,4 +1,8 @@
-
+/* Author : Mahmudul Hossain (19303235)
+ * Purpose : Generate all valid keys for Affine cipher to
+ * 			 work and save it into keys.txt
+ * Last modified : 13/04/2020
+ */
 import java.io.*;
 
 public class totalKeys
@@ -12,7 +16,6 @@ public class totalKeys
 	public static void generateKeys()
 	{
 		PrintWriter pw;
-		int total = 0;
 		 
 		try
 		{
@@ -22,19 +25,22 @@ public class totalKeys
 			{
 				for(int b = 0; b <= 27; b++)
 				{
+					//Only print out keys where a and b are between 1 and 27 inclusive
+					//a and 27 are co-prime
 					if(EuclidInv.isValid(a,b))
 					{
-						total++;
-						pw.println("(" + a + "," + b + ")   key number : " + total );
+						pw.println("(" + a + "," + b + ")");
 					}
 				}
 			}
+
+			System.out.println("Generated keys saved in keys.txt");
 
 			pw.close();
 		}
 		catch(IOException e)
 		{
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 	}
 }

@@ -1,4 +1,4 @@
-/* Author : Mahmudul Hossain
+/* Author : Mahmudul Hossain (19303235)
  * Purpose : Intiate affine cipher program by taking 
  * 			 valid user inputs with two options to 
  * 			 either perform encryption by reading the 
@@ -16,10 +16,12 @@ public class Test
 		Scanner sc = new Scanner(System.in);
 		int a, b;			
 		
+		//Provide options to user to either apply affine cipher on a file or from their input
 		System.out.println("Enter choice : (f/F) to read test file or (t/T) to enter text : ");
 		char c = sc.nextLine().charAt(0);
 		c = Character.toUpperCase(c);
 		
+		//Input validation
 		while((c != 'F') && (c != 'T'))
 		{
 			System.out.println("(Wrong input)Enter choice : (f/F) to read test file or (t/T) to enter text : ");
@@ -27,7 +29,7 @@ public class Test
 			c = Character.toUpperCase(c);
 		}
 
-			
+		//Input values for a and b
 		System.out.println("Enter value of a : ");
 		while (!sc.hasNextInt())
 		{
@@ -45,22 +47,24 @@ public class Test
 
 		b = sc.nextInt();
 
+		//Check if a and b is valid within range and they are co-prime
 		if(!EuclidInv.isValid(a,b))
 		{
 			System.err.println("Error keys (" + a + "," + b + ") are invalid try again by running the program");
 		}
 		else
 		{
+			//Initiate affine cipher
 			process(c,a,b);
 		}
 	}
 	
+	//Determine if user opted for file I/O or user input
 	public static void process(char c, int a, int b)	
 	{
 		switch(c)
 		{
 			case 'F' :		
-				//readFile(a,b);
 				fileOp(a,b);
 				break;
 			case 'T' :
@@ -71,31 +75,7 @@ public class Test
 		}
 	}
 		
-	public static void readFile(int a, int b)
-	{
-		try
-		{
-			File file = new File("testfile-Affine.txt");
-//		PrintWriter pw;
-			Scanner sc = new Scanner(file);
-			String plain = new String();
-
-			while(sc.hasNextLine())
-			{
-				plain = plain + sc.nextLine();
-			}	
-			
-			sc.close();
-		
-			outputOperation(plain, a, b);
-		}
-		catch(IOException e)
-		{
-			System.err.println(e.getMessage());
-		}
-
-	}
-
+	//Take input from user which will be the plain text
 	public static void userInput(int a, int b)
 	{
 		Scanner sc = new Scanner(System.in);
@@ -104,6 +84,9 @@ public class Test
 		outputOperation(plain,a,b);
 	}
 
+	//The user inputted plain text will go into Affine encryption and
+	//decryption and the whole operation will be saved onto Output.txt 
+	//file
 	public static void outputOperation(String plain, int a, int b)
 	{
 		try
@@ -112,7 +95,8 @@ public class Test
 			String encryptTxt = Affine.encrypt(plain,a,b);
 		
 			String decryptTxt = Affine.decrypt(encryptTxt,a,b);
-
+			
+			//Ensure that the decrypted text is same as the plain text
 			if(decryptTxt.compareTo(plain) == 0)
 			{
 				System.out.println("Encryption and decryption done successfully ");
@@ -125,7 +109,7 @@ public class Test
 			System.out.println("All operations written to Output.txt");
 					
 			pw = new PrintWriter("Output.txt");
-
+			
 			pw.println("Plain text     : " + plain);
 			pw.println("Encrypted text : " + encryptTxt);
 			pw.println("Decrypted text : " + decryptTxt);
@@ -140,6 +124,8 @@ public class Test
 		}
 	}
 
+	//Read from the test file and perform encryption and
+	//decryption line by line 
 	public static void fileOp(int a, int b)
 	{
 		Scanner sc;
@@ -148,7 +134,6 @@ public class Test
 		try
 		{
 			String plain = new String();
-		//	String line = new String();
 			String encrypted = new String();
 			String decrypted = new String();
 			file = new File("testfile-Affine.txt");
@@ -159,16 +144,20 @@ public class Test
 			while(sc.hasNextLine())
 			{
 				plain = sc.nextLine();
-			//	line = line + plain;
-
+				
+				//Perform encryption
 				encrypted = Affine.encrypt(plain,a,b);
+
+				//Perform decryption
 				decrypted = Affine.decrypt(encrypted,a,b);
 				if(decrypted.compareTo(plain) != 0)
 				{
 					System.out.println("Error : decrypted does not match plain text ");
 				}
-
+				
+				//Save the encrypted lines to encrypted.txt
 				pwEnc.println(encrypted);
+				//Save the decrypted lines to decrypted.txt
 				pwDec.println(decrypted);
 			}	
 			
@@ -185,8 +174,5 @@ public class Test
 		}
 
 	}
-
-
-
 
 }
